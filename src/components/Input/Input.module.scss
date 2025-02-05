@@ -1,0 +1,102 @@
+.Input :global {
+  // @apply min-h-[40px];
+}
+
+/* Label Styles */
+@mixin label-default {
+  @apply text-xs font-medium;
+}
+
+.label {
+  @include label-default;
+  @apply text-gray-darkest;
+}
+
+.hint {
+  @include label-default;
+  @apply text-gray-400;
+}
+
+/* Left Icon Styles */
+.leftIcon {
+  @apply pointer-events-none absolute inset-y-0 left-0 mt-1 flex items-center pl-3;
+}
+
+/*Right Icon Styles */
+.rightIcon {
+  @apply absolute top-1 right-0 p-2.5;
+}
+
+/* Message Styles */
+.messageIcon {
+  @apply mt-0.5 text-gray-darkest;
+}
+
+.messageText {
+  @apply text-sm font-normal text-neutral-400;
+}
+
+/* Chip Styles */
+
+@mixin chip-default {
+  @apply pointer-events-none absolute inset-y-0 left-0 flex items-center gap-1 pl-3;
+}
+
+.chipDefault {
+  @include chip-default;
+}
+
+.chipMessage {
+  @include chip-default;
+  @apply opacity-10;
+}
+
+/* Style Builder */
+
+@mixin default-style {
+  @apply flex rounded border-none font-sans text-base font-normal placeholder:font-light placeholder:text-gray-300;
+}
+
+.inputStyle {
+  @include default-style;
+  @apply block h-[40px] p-3 text-gray-darkest;
+}
+
+.iconStyle {
+  @apply pl-10;
+}
+
+.textareaStyle {
+  @include default-style;
+  @apply p-2.5 text-[16px];
+}
+
+.disabledStyle {
+  @apply pointer-events-none bg-neutral-200;
+}
+
+.notDisabledStyle {
+  @apply bg-gray-100;
+}
+
+@mixin hover-default {
+  @apply hover:outline hover:outline-1 hover:outline-blue-700 focus:outline focus:outline-1;
+}
+
+.regularStyle {
+  @include hover-default;
+  @apply focus:shadow-04 focus:outline-gray-darkest;
+}
+
+.nonErrorStyle {
+  @include hover-default;
+  @apply focus:shadow-04 focus:outline-blue-700;
+}
+
+.errorStyle {
+  @apply outline outline-1 outline-red-300 hover:outline hover:outline-1 hover:outline-red-600 focus:shadow-05;
+}
+
+.defaultErrorStyle {
+  @apply outline outline-1 outline-red-300;
+}

@@ -18,11 +18,53 @@ import UnstyledLink from '@/components/links/UnstyledLink';
  */
 import Logo from '~/svg/Logo.svg';
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
-
 export default function HomePage() {
+  // const reqMusic = async () => {
+  //   fetch(`https://api.musixmatch.com/ws/1.1/artist.get?artist_id=118&apikey=${API_KEY}`, {
+  //     method: 'GET',
+  //     mode: 'cors', // Enables cross-origin requests
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  // }
+  const API_KEY = '8e343bd24865f49e56ffb12348bb9ccf';
+  const BASE_URL = 'https://api.musixmatch.com/ws/1.1/';
+
+  const fetchLyrics = async (artist: string) => {
+    const params = new URLSearchParams({
+      // q_track: track, // Search by track name
+      q_artist: artist, // Search by artist name
+      apikey: API_KEY
+    });
+
+    try {
+      const response = await fetch(`${BASE_URL}matcher.lyrics.get?${params}`, {
+        method: 'GET',
+        mode: 'cors', // Allow cross-origin requests
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8' // UTF-8 encoding
+        }
+      });
+
+      console.log('response', response)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Lyrics Data:', data);
+      return data;
+    } catch (error) {
+      console.error('Error fetching lyrics:', error.message);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchLyrics('justin')
+  }, []);
+
   return (
     <main>
       <Head>
@@ -31,40 +73,10 @@ export default function HomePage() {
       <section className='bg-white'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
           <Logo className='w-16' />
-          <h1 className='mt-4'>Next.js + Tailwind CSS + TypeScript Starter</h1>
-          <p className='mt-2 text-sm text-gray-800'>
-            A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-            Import, Seo, Link component, pre-configured with Husky{' '}
-          </p>
-          <p className='mt-2 text-sm text-gray-700'>
-            <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-              See the repository
-            </ArrowLink>
-          </p>
 
-          <ButtonLink className='mt-6' href='/components' variant='light'>
-            See all components
+          <ButtonLink className='mt-6' href='/login' variant='light'>
+            Login
           </ButtonLink>
-
-          <UnstyledLink
-            href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-            className='mt-4'
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              width='92'
-              height='32'
-              src='https://vercel.com/button'
-              alt='Deploy with Vercel'
-            />
-          </UnstyledLink>
-
-          <footer className='absolute bottom-2 text-gray-700'>
-            © {new Date().getFullYear()} By{' '}
-            <UnderlineLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-              Theodorus Clarence
-            </UnderlineLink>
-          </footer>
         </div>
       </section>
     </main>

@@ -1,0 +1,12 @@
+.Loading:global {
+  @apply absolute top-0 left-0 flex h-full w-full items-center justify-center bg-white;
+  & > span {
+    width: 120px !important;
+  }
+  &.inline {
+    @apply relative justify-start;
+    > span {
+      width: 80px !important;
+    }
+  }
+}

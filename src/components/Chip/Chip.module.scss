@@ -1,0 +1,23 @@
+.Chip :global {
+  @apply inline-flex items-center rounded-[50px] text-center text-[14px] leading-[16.8px] text-white;
+  padding: 6px 16px 6px 14px;
+  background-color: #111;
+
+  .Chip__icon {
+    @apply mr-[8px] flex;
+  }
+}
+
+.Small {
+  @apply mr-[7px] text-[12px] leading-[14px];
+  padding: 2px 16px 2px 14px;
+}
+
+.Primary {
+  background-color: #2e8fff;
+}
+
+.Disabled {
+  color: #111;
+  background-color: #ededf2;
+}
