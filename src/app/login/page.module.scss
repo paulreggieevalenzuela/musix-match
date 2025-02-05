@@ -29,6 +29,14 @@
   }
 }
 
+.userDetails {
+  @apply text-left mb-4 capitalize;
+
+  span {
+    @apply lowercase font-bold;
+  }
+}
+
 .right {
   @apply flex flex-col items-center justify-center;
   @apply relative overflow-hidden p-6 w-full sm:w-2/3;

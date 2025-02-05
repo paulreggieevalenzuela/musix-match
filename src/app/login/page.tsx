@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from 'next-auth/react';
 
@@ -14,7 +13,6 @@ import Loading from '@/components/Loading';
 import NextImage from '@/components/NextImage';
 import { Input } from '@/components/Input';
 import s from './page.module.scss';
-import Logo from '~/svg/Logo.svg';
 import MusixMatchLogo from '~/images/musix.svg.png';
 
 type FormValues = {
@@ -57,19 +55,17 @@ export default function LoginPage() {
     });
 
     const onSubmit: SubmitHandler<FormValues> = async (data, e: any) => {
-        console.log('user', data);
         try {
             const res = await signIn("credentials", {
                 data,
                 redirect: false,
             });
-            console.log('res', res);
-            // setLoading(true);
-            // router.push("/dashboard");
+            setLoading(true);
+            router.push("/dashboard");
         } catch (error: any) {
-            console.log("Login failed", error.message);
+            console.error("Login failed", error.message);
         } finally {
-            // setLoading(false);
+            setLoading(false);
         }
     }
 
@@ -81,6 +77,10 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit(onSubmit)} className={s.right}>
                 <div className={s.rightContent}>
                     <h2>Welcome!</h2>
+                    <div className={s.userDetails}>
+                        <p>username: <span>john@email.com</span></p>
+                        <p>password: <span>1234</span></p>
+                    </div>
                     <div className={s.formContainer}>
                         <InputRef
                             className={s.InputContainer}
@@ -104,9 +104,6 @@ export default function LoginPage() {
                         {loading && <Loading />}
                         <Button type='submit'>
                             Login
-                        </Button>
-                        <Button className={s.ctaForgot}>
-                            Forgot your password?
                         </Button>
                     </div>
                 </div>
